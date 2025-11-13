@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Pcb, TestSequence
 from django.contrib import messages
-from .forms import UpdateBoard
+from .forms import UpdateBoard, SerNumForm
+from .models import Serialnumber
 
 # Home page
 def home(request):
@@ -62,6 +63,19 @@ def add_board(request):
         # Return the board's info into the board.html page and load it. 
         return render(request, 'add_board.html', {'board':board, 'form':form})
 
+def create_sernum(request):
+    if request.method == 'POST':
+        form = SerNumForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('sernum_form.html') # Redirect to the same page or another success page.
+    else:
+        form = SerNumForm()
+    
+    # Optional: Retrieve all serial numbers to display on the page
+    ser_nums = Serialnumber.objects.all()
+
+    return render(request, 'sernum_form.html', {'form': form, 'ser_nums': ser_nums, })
 
 
 

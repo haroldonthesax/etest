@@ -10,5 +10,6 @@ urlpatterns = [
     path('login/', views.login_user, name="login"),
     path('logout/', views.logout_user, name="logout"),
     path('register/', views.register_user, name="register"),
+    path('sernum_forms/', views.create_sernum, name='create_sernum'),
 
 ]

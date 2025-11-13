@@ -1,5 +1,5 @@
 from django import forms
-from .models import Pcb
+from .models import Pcb, Serialnumber
 
 # Creaet an update form
 class UpdateBoard(forms.ModelForm):
@@ -16,3 +16,8 @@ class UpdateBoard(forms.ModelForm):
         model = Pcb
         # These fields are the same as the model fields as well
         fields = ('part_num', 'rev', 'serial_num', 'mac', 'ip', 'firmware', 'image', )
+
+class SerNumForm(forms.ModelForm):
+    class Meta:
+        model = Serialnumber
+        fields = ['sn_num', 'pcb']

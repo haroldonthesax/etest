@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Serial Number</title>
+</head>
+<body>
+    <h2>Create a new Serial Number</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+
+    <h2>Existing Serial Numbers</h2>
+    <ul>
+        {% for sn in ser_nums %}
+            <!-- Access the related Pcb object using the foreign key relationship -->
+            <li>{{ sn.serial_number }} (PCB: {{ sn.pcb.name }})</li>
+        {% empty %}
+            <li>No serial numbers found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
