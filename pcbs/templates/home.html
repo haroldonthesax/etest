@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1> PCBs </h1>
+<br/>
+
+
+
+<table class="table table-striped table-hover table-bordered table-dark ">
+  <thead class="table-light ">
+    <tr>
+      <th scope="col">Part Number</th>
+      <th scope="col">Rev</th>
+      <th scope="col">SN</th>
+      <th scope="col">MAC Number</th>
+      <th scope="col">IP</th>
+      <th scope="col">Firmware</th>
+      <th scope="col">Test Sequence Date</th>
+    </tr>
+  </thead>
+  <tbody>
+
+{% for item in pcbs %}
+    <tr>
+        <td><a href="{% url 'board' item.id %}"> {{ item.part_num }}</a></td><!-- 'item' is the record of the circuit_boards query from the views file.-->
+        <td>{{ item.rev }}</td>
+        <td>{{ item.serial_num }}</td>
+        <td>{{ item.mac }}</td>
+        <td>{{ item.ip }}</td>
+        <td>{{ item.firmware }}</td>
+        <td>{{ item.date_created }}</td>
+        <td><a href="{% url 'delete_board' item.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+    </tr>
+{% endfor%}
+  </tbody>
+</table>
+
+
+{% endblock %}

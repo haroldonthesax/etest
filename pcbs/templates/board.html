@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card">
+  <div class="card-header">
+    
+  </div>
+  <div class="card-body">
+        {% if board.image %}
+          <img src="{{ board.image.url }} " width=200 ><br/>
+        {% endif %}
+        <strong>Rev:</strong>{{ board.rev }}<br/>
+        <strong>Serial Number:</strong>{{ board.serial_num }}<br/>
+        <strong>MAC Address:</strong>{{ board.mac }}<br/>
+        <strong>IP Address:</strong>{{ board.ip }}<br/>
+        <strong>Firmware:</strong>{{ board.firmware }}<br/>
+        <br/>
+        <a href="{% url 'home'  %}" class="btn btn-outline-secondary">Back</a>
+        <a href="{% url 'delete_board' board.id %}" class="btn btn-danger">Delete</a> <!-- Go to url 'delete' and pass the board.id for reference-->
+
+  </div>
+</div>
+<br/>
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %} 
+  {{ form.as_p }}
+<br/>
+<button type="submit" class="btn btn-secondary">Update Record</button>
+</form>
+
+
+{% endblock %}
